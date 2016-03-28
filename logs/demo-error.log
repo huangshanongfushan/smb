@@ -1,0 +1,28 @@
+2016-03-27 21:55:49,238 [main] ERROR Application - 
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'organization_id' cannot be null
+### The error may involve UsersMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: insert into users (id, first_name, last_name,        email_address, organization_id, login_id,        password, employee_id)     values (?, ?, ?,        ?, ?, ?,        ?, ?)
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'organization_id' cannot be null
+; SQL []; Column 'organization_id' cannot be null; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'organization_id' cannot be null
+2016-03-27 21:56:42,446 [main] ERROR Application - 
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`ngp`.`users`, CONSTRAINT `FK_users_1` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`))
+### The error may involve UsersMapper.insertSelective-Inline
+### The error occurred while setting parameters
+### SQL: insert into users          ( id,                                           first_name,                                                                     organization_id,                                           login_id )           values ( ?,                                           ?,                                                                     ?,                                           ? )
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`ngp`.`users`, CONSTRAINT `FK_users_1` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`))
+; SQL []; Cannot add or update a child row: a foreign key constraint fails (`ngp`.`users`, CONSTRAINT `FK_users_1` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`)); nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`ngp`.`users`, CONSTRAINT `FK_users_1` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`))
+2016-03-27 21:59:22,427 [main] ERROR Application - 
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`ngp`.`users`, CONSTRAINT `FK_users_1` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`))
+### The error may involve UsersMapper.updateByPrimaryKeySelective-Inline
+### The error occurred while setting parameters
+### SQL: update users          SET organization_id = ?          where id = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`ngp`.`users`, CONSTRAINT `FK_users_1` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`))
+; SQL []; Cannot add or update a child row: a foreign key constraint fails (`ngp`.`users`, CONSTRAINT `FK_users_1` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`)); nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`ngp`.`users`, CONSTRAINT `FK_users_1` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`))
+2016-03-27 22:01:26,399 [main] ERROR Application - error update user
+2016-03-27 22:02:29,028 [main] ERROR Application - error update user
+2016-03-27 22:12:31,299 [main] ERROR Application - error update user
+2016-03-27 22:14:04,750 [main] ERROR Application - error update user
+2016-03-27 22:16:50,799 [main] ERROR Application - error update user
+2016-03-27 22:45:36,686 [main] ERROR Application - error update user
+2016-03-28 13:09:40,796 [main] ERROR Application - error update user
