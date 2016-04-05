@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="D:\mysql-connector-java-5.1.32.jar"/>
+    <classPathEntry location="D:\Oracle_11g_11.2.0.1.0_JDBC_ojdbc6.jar"/>
     <context id="testTables" targetRuntime="MyBatis3">
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
@@ -16,10 +16,10 @@
         <!--userId="${jdbc.username}"-->
         <!--password="${jdbc.password}">-->
         <!--</jdbcConnection>-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3307/ngp"
-                        userId="root"
-                        password="dc2014">
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@192.168.2.220:1521:xe"
+                        userId="dclog"
+                        password="dc2015">
         </jdbcConnection>
 
         <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
@@ -51,7 +51,7 @@
         </javaClientGenerator>
         <!-- 指定数据库表 -->
         <!--<table tableName="call"></table>-->
-        <table tableName="users"></table>
+        <table tableName="MEDIA"></table>
         <!--<table tableName="Media"></table>-->
         <!--<table tableName="rights"></table>-->
         <!--<table tableName="device"></table>-->

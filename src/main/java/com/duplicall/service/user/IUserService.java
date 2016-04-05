@@ -1,4 +1,4 @@
-package com.duplicall.service;
+package com.duplicall.service.user;
 
 import com.duplicall.model.Users;
 

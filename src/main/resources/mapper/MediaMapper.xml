@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duplicall.mapper.MediaMapper" >
+  <resultMap id="BaseResultMap" type="com.duplicall.model.Media" >
+    <result column="REFERENCE_ID" property="referenceId" jdbcType="VARCHAR" />
+    <result column="PATH" property="path" jdbcType="VARCHAR" />
+    <result column="SHORT_NAME0" property="shortName0" jdbcType="VARCHAR" />
+    <result column="SHORT_NAME1" property="shortName1" jdbcType="VARCHAR" />
+    <result column="REMOTE_PATH" property="remotePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    REFERENCE_ID, PATH, SHORT_NAME0, SHORT_NAME1, REMOTE_PATH
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duplicall.model.MediaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MEDIA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.duplicall.model.MediaExample" >
+    delete from MEDIA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.duplicall.model.Media" >
+    insert into MEDIA (REFERENCE_ID, PATH, SHORT_NAME0, 
+      SHORT_NAME1, REMOTE_PATH)
+    values (#{referenceId,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{shortName0,jdbcType=VARCHAR}, 
+      #{shortName1,jdbcType=VARCHAR}, #{remotePath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.duplicall.model.Media" >
+    insert into MEDIA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="referenceId != null" >
+        REFERENCE_ID,
+      </if>
+      <if test="path != null" >
+        PATH,
+      </if>
+      <if test="shortName0 != null" >
+        SHORT_NAME0,
+      </if>
+      <if test="shortName1 != null" >
+        SHORT_NAME1,
+      </if>
+      <if test="remotePath != null" >
+        REMOTE_PATH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="referenceId != null" >
+        #{referenceId,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName0 != null" >
+        #{shortName0,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName1 != null" >
+        #{shortName1,jdbcType=VARCHAR},
+      </if>
+      <if test="remotePath != null" >
+        #{remotePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.duplicall.model.MediaExample" resultType="java.lang.Integer" >
+    select count(*) from MEDIA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update MEDIA
+    <set >
+      <if test="record.referenceId != null" >
+        REFERENCE_ID = #{record.referenceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        PATH = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortName0 != null" >
+        SHORT_NAME0 = #{record.shortName0,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortName1 != null" >
+        SHORT_NAME1 = #{record.shortName1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remotePath != null" >
+        REMOTE_PATH = #{record.remotePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update MEDIA
+    set REFERENCE_ID = #{record.referenceId,jdbcType=VARCHAR},
+      PATH = #{record.path,jdbcType=VARCHAR},
+      SHORT_NAME0 = #{record.shortName0,jdbcType=VARCHAR},
+      SHORT_NAME1 = #{record.shortName1,jdbcType=VARCHAR},
+      REMOTE_PATH = #{record.remotePath,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

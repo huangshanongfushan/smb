@@ -29,11 +29,13 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Properties;
+
 /**
  * MyBatis扫描接口
  *
- * @author liuzh
- * @since 2015-12-19 14:46
+ * @author mli
+ * @since 2016-03-19 14:46
  */
 @Configuration
 //TODO 注意，由于MapperScannerConfigurer执行的比较早，所以必须有下面的注解

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duplicall.mapper.TargetMapper">
+    <resultMap id="BaseResultMap" type="com.duplicall.pojo.TargetCustom">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="TYPE" property="type" jdbcType="VARCHAR"/>
+        <result column="RETENTION_ID" property="retentionPolicy.id"/>
+        <result column="RETENTION_NAME" property="retentionPolicy.name"/>
+        <result column="PERIOD" property="retentionPolicy.period"/>
+        <result column="DESCRIPTION" property="description" jdbcType="VARCHAR"/>
+        <result column="LINE_COUNT" property="lineCount" jdbcType="DECIMAL"/>
+        <result column="ENCRYPTED" property="encrypted" jdbcType="DECIMAL"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="DEVICE_ID" property="deviceId" jdbcType="DECIMAL"/>
+        <result column="ACTIVE" property="active" jdbcType="DECIMAL"/>
+
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    ID, NAME, TYPE, DESCRIPTION, LINE_COUNT, ENCRYPTED, PASSWORD, DEVICE_ID, ACTIVE
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duplicall.model.TargetExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from TARGET
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from TARGET
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TARGET
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.duplicall.model.TargetExample">
+        delete from TARGET
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.duplicall.model.Target">
+    insert into TARGET (ID, NAME, TYPE,
+      DESCRIPTION, LINE_COUNT, ENCRYPTED,
+      PASSWORD, DEVICE_ID, ACTIVE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{lineCount,jdbcType=DECIMAL}, #{encrypted,jdbcType=DECIMAL},
+      #{password,jdbcType=VARCHAR}, #{deviceId,jdbcType=DECIMAL}, #{active,jdbcType=DECIMAL}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.duplicall.model.Target">
+        insert into TARGET
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="name != null">
+                NAME,
+            </if>
+            <if test="type != null">
+                TYPE,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="lineCount != null">
+                LINE_COUNT,
+            </if>
+            <if test="encrypted != null">
+                ENCRYPTED,
+            </if>
+            <if test="password != null">
+                PASSWORD,
+            </if>
+            <if test="deviceId != null">
+                DEVICE_ID,
+            </if>
+            <if test="active != null">
+                ACTIVE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="lineCount != null">
+                #{lineCount,jdbcType=DECIMAL},
+            </if>
+            <if test="encrypted != null">
+                #{encrypted,jdbcType=DECIMAL},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceId != null">
+                #{deviceId,jdbcType=DECIMAL},
+            </if>
+            <if test="active != null">
+                #{active,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.duplicall.model.TargetExample" resultType="java.lang.Integer">
+        select count(*) from TARGET
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update TARGET
+        <set>
+            <if test="record.id != null">
+                ID = #{record.id,jdbcType=DECIMAL},
+            </if>
+            <if test="record.name != null">
+                NAME = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null">
+                TYPE = #{record.type,jdbcType=VARCHAR},
+            </if>
+            <if test="record.description != null">
+                DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lineCount != null">
+                LINE_COUNT = #{record.lineCount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.encrypted != null">
+                ENCRYPTED = #{record.encrypted,jdbcType=DECIMAL},
+            </if>
+            <if test="record.password != null">
+                PASSWORD = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceId != null">
+                DEVICE_ID = #{record.deviceId,jdbcType=DECIMAL},
+            </if>
+            <if test="record.active != null">
+                ACTIVE = #{record.active,jdbcType=DECIMAL},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update TARGET
+        set ID = #{record.id,jdbcType=DECIMAL},
+        NAME = #{record.name,jdbcType=VARCHAR},
+        TYPE = #{record.type,jdbcType=VARCHAR},
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+        LINE_COUNT = #{record.lineCount,jdbcType=DECIMAL},
+        ENCRYPTED = #{record.encrypted,jdbcType=DECIMAL},
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+        DEVICE_ID = #{record.deviceId,jdbcType=DECIMAL},
+        ACTIVE = #{record.active,jdbcType=DECIMAL}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.duplicall.model.Target">
+        update TARGET
+        <set>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                TYPE = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="lineCount != null">
+                LINE_COUNT = #{lineCount,jdbcType=DECIMAL},
+            </if>
+            <if test="encrypted != null">
+                ENCRYPTED = #{encrypted,jdbcType=DECIMAL},
+            </if>
+            <if test="password != null">
+                PASSWORD = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceId != null">
+                DEVICE_ID = #{deviceId,jdbcType=DECIMAL},
+            </if>
+            <if test="active != null">
+                ACTIVE = #{active,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.duplicall.model.Target">
+    update TARGET
+    set NAME = #{name,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      LINE_COUNT = #{lineCount,jdbcType=DECIMAL},
+      ENCRYPTED = #{encrypted,jdbcType=DECIMAL},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      DEVICE_ID = #{deviceId,jdbcType=DECIMAL},
+      ACTIVE = #{active,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+    <select id="selectAllTargets" resultMap="BaseResultMap">
+        SELECT a.id id,
+          a.name,
+          a.TYPE,
+          a.DESCRIPTION,
+          b.ID RETENTION_ID,
+          b.NAME RETENTION_NAME,
+          b.PERIOD
+        FROM TARGET a,
+          RETENTION_POLICIES b,
+          TARGET_RETENTION c
+        WHERE a.ID=c.TARGET_ID
+        AND b.ID  =c.RETENTION_ID
+    </select>
+</mapper>

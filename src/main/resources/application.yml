@@ -1,12 +1,12 @@
 spring:
     datasource:
-        name: ngp
-        url: jdbc:mysql://localhost:3307/ngp
-        username: root
-        password: dc2014
+        name: dclog
+        url: jdbc:oracle:thin:@192.168.2.220:1521:xe
+        username: dclog
+        password: dc2015
         # HikariDataSource
         type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: oracle.jdbc.driver.OracleDriver
         filters: stat
         maxActive: 1
         initialSize: 1
@@ -14,13 +14,15 @@ spring:
         minIdle: 0
         timeBetweenEvictionRunsMillis: 60000
         minEvictableIdleTimeMillis: 300000
-        validationQuery: select 'x'
+        validationQuery: SELECT 'x' FROM DUAL
         testWhileIdle: true
         testOnBorrow: false
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+    aop:
+      auto: true
 
-mybatis:
-  mapperLocations: classpath:mapper/*.xml
-  typeAliasesPackage: com.duplicall.model
+#mybatis:
+#  mapperLocations: classpath:mapper/*.xml
+#  typeAliasesPackage: com.duplicall.model

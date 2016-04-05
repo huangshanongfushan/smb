@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -25,7 +26,7 @@ import java.util.Properties;
  * @since 2015-12-19 10:11
  */
 @Configuration
-@EnableTransactionManagement
+@EnableTransactionManagement(mode = AdviceMode.PROXY)
 public class MyBatisConfig implements TransactionManagementConfigurer {
 
     @Autowired

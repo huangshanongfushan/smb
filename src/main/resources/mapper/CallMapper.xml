@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duplicall.mapper.CallMapper">
+    <resultMap id="BaseResultMap" type="com.duplicall.pojo.CallCustom">
+        <id column="REFERENCE_ID" property="referenceId" jdbcType="VARCHAR"/>
+        <result column="SYSTEM_ID" property="systemId" jdbcType="DECIMAL"/>
+        <result column="CHANNEL_ID" property="channelId" jdbcType="DECIMAL"/>
+        <result column="DEVICE_ID" property="deviceId" jdbcType="DECIMAL"/>
+        <result column="EXTENSION" property="extension" jdbcType="VARCHAR"/>
+        <result column="CALLER_ID" property="callerId" jdbcType="VARCHAR"/>
+        <result column="CALLED_ID" property="calledId" jdbcType="VARCHAR"/>
+        <result column="AGENT_ID" property="agentId" jdbcType="VARCHAR"/>
+        <result column="STAFF_ID" property="staffId" jdbcType="DECIMAL"/>
+        <result column="CALL_TYPE" property="callType" jdbcType="VARCHAR"/>
+        <result column="ANSWERED" property="answered" jdbcType="DECIMAL"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_PTIME" property="createPtime" jdbcType="DECIMAL"/>
+        <result column="CONNECT_TIME" property="connectTime" jdbcType="TIMESTAMP"/>
+        <result column="RELEASE_TIME" property="releaseTime" jdbcType="TIMESTAMP"/>
+        <result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP"/>
+        <result column="STATE" property="state" jdbcType="CHAR"/>
+        <result column="TRIGGER_TIME" property="triggerTime" jdbcType="TIMESTAMP"/>
+        <result column="START_TYPE" property="startType" jdbcType="VARCHAR"/>
+        <result column="ENCRYPTED" property="encrypted" jdbcType="DECIMAL"/>
+        <result column="TRANSFER_COUNT" property="transferCount" jdbcType="DECIMAL"/>
+        <result column="TAG_COUNT" property="tagCount" jdbcType="DECIMAL"/>
+        <result column="THIRD_PARTY" property="thirdParty" jdbcType="VARCHAR"/>
+        <result column="CUSTOM1" property="custom1" jdbcType="VARCHAR"/>
+        <result column="CUSTOM2" property="custom2" jdbcType="VARCHAR"/>
+        <result column="DURATION" property="duration" jdbcType="DECIMAL"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    REFERENCE_ID, SYSTEM_ID, CHANNEL_ID, DEVICE_ID, EXTENSION, CALLER_ID, CALLED_ID, 
+    AGENT_ID, STAFF_ID, CALL_TYPE, ANSWERED, CREATE_TIME, CREATE_PTIME, CONNECT_TIME, 
+    RELEASE_TIME, INSERT_TIME, STATE, TRIGGER_TIME, START_TYPE, ENCRYPTED, TRANSFER_COUNT, 
+    TAG_COUNT, THIRD_PARTY, CUSTOM1, CUSTOM2, DURATION
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duplicall.model.CallExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from CALL
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from CALL
+        where REFERENCE_ID = #{referenceId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CALL
+    where REFERENCE_ID = #{referenceId,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.duplicall.model.CallExample">
+        delete from CALL
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.duplicall.model.Call">
+    insert into CALL (REFERENCE_ID, SYSTEM_ID, CHANNEL_ID, 
+      DEVICE_ID, EXTENSION, CALLER_ID, 
+      CALLED_ID, AGENT_ID, STAFF_ID, 
+      CALL_TYPE, ANSWERED, CREATE_TIME, 
+      CREATE_PTIME, CONNECT_TIME, RELEASE_TIME, 
+      INSERT_TIME, STATE, TRIGGER_TIME, 
+      START_TYPE, ENCRYPTED, TRANSFER_COUNT, 
+      TAG_COUNT, THIRD_PARTY, CUSTOM1, 
+      CUSTOM2, DURATION)
+    values (#{referenceId,jdbcType=VARCHAR}, #{systemId,jdbcType=DECIMAL}, #{channelId,jdbcType=DECIMAL}, 
+      #{deviceId,jdbcType=DECIMAL}, #{extension,jdbcType=VARCHAR}, #{callerId,jdbcType=VARCHAR}, 
+      #{calledId,jdbcType=VARCHAR}, #{agentId,jdbcType=VARCHAR}, #{staffId,jdbcType=DECIMAL}, 
+      #{callType,jdbcType=VARCHAR}, #{answered,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createPtime,jdbcType=DECIMAL}, #{connectTime,jdbcType=TIMESTAMP}, #{releaseTime,jdbcType=TIMESTAMP}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{state,jdbcType=CHAR}, #{triggerTime,jdbcType=TIMESTAMP}, 
+      #{startType,jdbcType=VARCHAR}, #{encrypted,jdbcType=DECIMAL}, #{transferCount,jdbcType=DECIMAL}, 
+      #{tagCount,jdbcType=DECIMAL}, #{thirdParty,jdbcType=VARCHAR}, #{custom1,jdbcType=VARCHAR}, 
+      #{custom2,jdbcType=VARCHAR}, #{duration,jdbcType=DECIMAL})
+  </insert>
+    <insert id="insertSelective" parameterType="com.duplicall.model.Call">
+        insert into CALL
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="referenceId != null">
+                REFERENCE_ID,
+            </if>
+            <if test="systemId != null">
+                SYSTEM_ID,
+            </if>
+            <if test="channelId != null">
+                CHANNEL_ID,
+            </if>
+            <if test="deviceId != null">
+                DEVICE_ID,
+            </if>
+            <if test="extension != null">
+                EXTENSION,
+            </if>
+            <if test="callerId != null">
+                CALLER_ID,
+            </if>
+            <if test="calledId != null">
+                CALLED_ID,
+            </if>
+            <if test="agentId != null">
+                AGENT_ID,
+            </if>
+            <if test="staffId != null">
+                STAFF_ID,
+            </if>
+            <if test="callType != null">
+                CALL_TYPE,
+            </if>
+            <if test="answered != null">
+                ANSWERED,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="createPtime != null">
+                CREATE_PTIME,
+            </if>
+            <if test="connectTime != null">
+                CONNECT_TIME,
+            </if>
+            <if test="releaseTime != null">
+                RELEASE_TIME,
+            </if>
+            <if test="insertTime != null">
+                INSERT_TIME,
+            </if>
+            <if test="state != null">
+                STATE,
+            </if>
+            <if test="triggerTime != null">
+                TRIGGER_TIME,
+            </if>
+            <if test="startType != null">
+                START_TYPE,
+            </if>
+            <if test="encrypted != null">
+                ENCRYPTED,
+            </if>
+            <if test="transferCount != null">
+                TRANSFER_COUNT,
+            </if>
+            <if test="tagCount != null">
+                TAG_COUNT,
+            </if>
+            <if test="thirdParty != null">
+                THIRD_PARTY,
+            </if>
+            <if test="custom1 != null">
+                CUSTOM1,
+            </if>
+            <if test="custom2 != null">
+                CUSTOM2,
+            </if>
+            <if test="duration != null">
+                DURATION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="referenceId != null">
+                #{referenceId,jdbcType=VARCHAR},
+            </if>
+            <if test="systemId != null">
+                #{systemId,jdbcType=DECIMAL},
+            </if>
+            <if test="channelId != null">
+                #{channelId,jdbcType=DECIMAL},
+            </if>
+            <if test="deviceId != null">
+                #{deviceId,jdbcType=DECIMAL},
+            </if>
+            <if test="extension != null">
+                #{extension,jdbcType=VARCHAR},
+            </if>
+            <if test="callerId != null">
+                #{callerId,jdbcType=VARCHAR},
+            </if>
+            <if test="calledId != null">
+                #{calledId,jdbcType=VARCHAR},
+            </if>
+            <if test="agentId != null">
+                #{agentId,jdbcType=VARCHAR},
+            </if>
+            <if test="staffId != null">
+                #{staffId,jdbcType=DECIMAL},
+            </if>
+            <if test="callType != null">
+                #{callType,jdbcType=VARCHAR},
+            </if>
+            <if test="answered != null">
+                #{answered,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createPtime != null">
+                #{createPtime,jdbcType=DECIMAL},
+            </if>
+            <if test="connectTime != null">
+                #{connectTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="releaseTime != null">
+                #{releaseTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertTime != null">
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=CHAR},
+            </if>
+            <if test="triggerTime != null">
+                #{triggerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startType != null">
+                #{startType,jdbcType=VARCHAR},
+            </if>
+            <if test="encrypted != null">
+                #{encrypted,jdbcType=DECIMAL},
+            </if>
+            <if test="transferCount != null">
+                #{transferCount,jdbcType=DECIMAL},
+            </if>
+            <if test="tagCount != null">
+                #{tagCount,jdbcType=DECIMAL},
+            </if>
+            <if test="thirdParty != null">
+                #{thirdParty,jdbcType=VARCHAR},
+            </if>
+            <if test="custom1 != null">
+                #{custom1,jdbcType=VARCHAR},
+            </if>
+            <if test="custom2 != null">
+                #{custom2,jdbcType=VARCHAR},
+            </if>
+            <if test="duration != null">
+                #{duration,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.duplicall.model.CallExample" resultType="java.lang.Integer">
+        select count(*) from CALL
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update CALL
+        <set>
+            <if test="record.referenceId != null">
+                REFERENCE_ID = #{record.referenceId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.systemId != null">
+                SYSTEM_ID = #{record.systemId,jdbcType=DECIMAL},
+            </if>
+            <if test="record.channelId != null">
+                CHANNEL_ID = #{record.channelId,jdbcType=DECIMAL},
+            </if>
+            <if test="record.deviceId != null">
+                DEVICE_ID = #{record.deviceId,jdbcType=DECIMAL},
+            </if>
+            <if test="record.extension != null">
+                EXTENSION = #{record.extension,jdbcType=VARCHAR},
+            </if>
+            <if test="record.callerId != null">
+                CALLER_ID = #{record.callerId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.calledId != null">
+                CALLED_ID = #{record.calledId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.agentId != null">
+                AGENT_ID = #{record.agentId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.staffId != null">
+                STAFF_ID = #{record.staffId,jdbcType=DECIMAL},
+            </if>
+            <if test="record.callType != null">
+                CALL_TYPE = #{record.callType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.answered != null">
+                ANSWERED = #{record.answered,jdbcType=DECIMAL},
+            </if>
+            <if test="record.createTime != null">
+                CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createPtime != null">
+                CREATE_PTIME = #{record.createPtime,jdbcType=DECIMAL},
+            </if>
+            <if test="record.connectTime != null">
+                CONNECT_TIME = #{record.connectTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.releaseTime != null">
+                RELEASE_TIME = #{record.releaseTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.insertTime != null">
+                INSERT_TIME = #{record.insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.state != null">
+                STATE = #{record.state,jdbcType=CHAR},
+            </if>
+            <if test="record.triggerTime != null">
+                TRIGGER_TIME = #{record.triggerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.startType != null">
+                START_TYPE = #{record.startType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.encrypted != null">
+                ENCRYPTED = #{record.encrypted,jdbcType=DECIMAL},
+            </if>
+            <if test="record.transferCount != null">
+                TRANSFER_COUNT = #{record.transferCount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.tagCount != null">
+                TAG_COUNT = #{record.tagCount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.thirdParty != null">
+                THIRD_PARTY = #{record.thirdParty,jdbcType=VARCHAR},
+            </if>
+            <if test="record.custom1 != null">
+                CUSTOM1 = #{record.custom1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.custom2 != null">
+                CUSTOM2 = #{record.custom2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.duration != null">
+                DURATION = #{record.duration,jdbcType=DECIMAL},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update CALL
+        set REFERENCE_ID = #{record.referenceId,jdbcType=VARCHAR},
+        SYSTEM_ID = #{record.systemId,jdbcType=DECIMAL},
+        CHANNEL_ID = #{record.channelId,jdbcType=DECIMAL},
+        DEVICE_ID = #{record.deviceId,jdbcType=DECIMAL},
+        EXTENSION = #{record.extension,jdbcType=VARCHAR},
+        CALLER_ID = #{record.callerId,jdbcType=VARCHAR},
+        CALLED_ID = #{record.calledId,jdbcType=VARCHAR},
+        AGENT_ID = #{record.agentId,jdbcType=VARCHAR},
+        STAFF_ID = #{record.staffId,jdbcType=DECIMAL},
+        CALL_TYPE = #{record.callType,jdbcType=VARCHAR},
+        ANSWERED = #{record.answered,jdbcType=DECIMAL},
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+        CREATE_PTIME = #{record.createPtime,jdbcType=DECIMAL},
+        CONNECT_TIME = #{record.connectTime,jdbcType=TIMESTAMP},
+        RELEASE_TIME = #{record.releaseTime,jdbcType=TIMESTAMP},
+        INSERT_TIME = #{record.insertTime,jdbcType=TIMESTAMP},
+        STATE = #{record.state,jdbcType=CHAR},
+        TRIGGER_TIME = #{record.triggerTime,jdbcType=TIMESTAMP},
+        START_TYPE = #{record.startType,jdbcType=VARCHAR},
+        ENCRYPTED = #{record.encrypted,jdbcType=DECIMAL},
+        TRANSFER_COUNT = #{record.transferCount,jdbcType=DECIMAL},
+        TAG_COUNT = #{record.tagCount,jdbcType=DECIMAL},
+        THIRD_PARTY = #{record.thirdParty,jdbcType=VARCHAR},
+        CUSTOM1 = #{record.custom1,jdbcType=VARCHAR},
+        CUSTOM2 = #{record.custom2,jdbcType=VARCHAR},
+        DURATION = #{record.duration,jdbcType=DECIMAL}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.duplicall.model.Call">
+        update CALL
+        <set>
+            <if test="systemId != null">
+                SYSTEM_ID = #{systemId,jdbcType=DECIMAL},
+            </if>
+            <if test="channelId != null">
+                CHANNEL_ID = #{channelId,jdbcType=DECIMAL},
+            </if>
+            <if test="deviceId != null">
+                DEVICE_ID = #{deviceId,jdbcType=DECIMAL},
+            </if>
+            <if test="extension != null">
+                EXTENSION = #{extension,jdbcType=VARCHAR},
+            </if>
+            <if test="callerId != null">
+                CALLER_ID = #{callerId,jdbcType=VARCHAR},
+            </if>
+            <if test="calledId != null">
+                CALLED_ID = #{calledId,jdbcType=VARCHAR},
+            </if>
+            <if test="agentId != null">
+                AGENT_ID = #{agentId,jdbcType=VARCHAR},
+            </if>
+            <if test="staffId != null">
+                STAFF_ID = #{staffId,jdbcType=DECIMAL},
+            </if>
+            <if test="callType != null">
+                CALL_TYPE = #{callType,jdbcType=VARCHAR},
+            </if>
+            <if test="answered != null">
+                ANSWERED = #{answered,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createPtime != null">
+                CREATE_PTIME = #{createPtime,jdbcType=DECIMAL},
+            </if>
+            <if test="connectTime != null">
+                CONNECT_TIME = #{connectTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="releaseTime != null">
+                RELEASE_TIME = #{releaseTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertTime != null">
+                INSERT_TIME = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=CHAR},
+            </if>
+            <if test="triggerTime != null">
+                TRIGGER_TIME = #{triggerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startType != null">
+                START_TYPE = #{startType,jdbcType=VARCHAR},
+            </if>
+            <if test="encrypted != null">
+                ENCRYPTED = #{encrypted,jdbcType=DECIMAL},
+            </if>
+            <if test="transferCount != null">
+                TRANSFER_COUNT = #{transferCount,jdbcType=DECIMAL},
+            </if>
+            <if test="tagCount != null">
+                TAG_COUNT = #{tagCount,jdbcType=DECIMAL},
+            </if>
+            <if test="thirdParty != null">
+                THIRD_PARTY = #{thirdParty,jdbcType=VARCHAR},
+            </if>
+            <if test="custom1 != null">
+                CUSTOM1 = #{custom1,jdbcType=VARCHAR},
+            </if>
+            <if test="custom2 != null">
+                CUSTOM2 = #{custom2,jdbcType=VARCHAR},
+            </if>
+            <if test="duration != null">
+                DURATION = #{duration,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where REFERENCE_ID = #{referenceId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.duplicall.model.Call">
+    update CALL
+    set SYSTEM_ID = #{systemId,jdbcType=DECIMAL},
+      CHANNEL_ID = #{channelId,jdbcType=DECIMAL},
+      DEVICE_ID = #{deviceId,jdbcType=DECIMAL},
+      EXTENSION = #{extension,jdbcType=VARCHAR},
+      CALLER_ID = #{callerId,jdbcType=VARCHAR},
+      CALLED_ID = #{calledId,jdbcType=VARCHAR},
+      AGENT_ID = #{agentId,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=DECIMAL},
+      CALL_TYPE = #{callType,jdbcType=VARCHAR},
+      ANSWERED = #{answered,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_PTIME = #{createPtime,jdbcType=DECIMAL},
+      CONNECT_TIME = #{connectTime,jdbcType=TIMESTAMP},
+      RELEASE_TIME = #{releaseTime,jdbcType=TIMESTAMP},
+      INSERT_TIME = #{insertTime,jdbcType=TIMESTAMP},
+      STATE = #{state,jdbcType=CHAR},
+      TRIGGER_TIME = #{triggerTime,jdbcType=TIMESTAMP},
+      START_TYPE = #{startType,jdbcType=VARCHAR},
+      ENCRYPTED = #{encrypted,jdbcType=DECIMAL},
+      TRANSFER_COUNT = #{transferCount,jdbcType=DECIMAL},
+      TAG_COUNT = #{tagCount,jdbcType=DECIMAL},
+      THIRD_PARTY = #{thirdParty,jdbcType=VARCHAR},
+      CUSTOM1 = #{custom1,jdbcType=VARCHAR},
+      CUSTOM2 = #{custom2,jdbcType=VARCHAR},
+      DURATION = #{duration,jdbcType=DECIMAL}
+    where REFERENCE_ID = #{referenceId,jdbcType=VARCHAR}
+  </update>
+
+
+    <select id="selectByExtension" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM CALL WHERE ((#{0}-CREATE_PTIME)/#{1})>#{2} AND EXTENTION=#{3}
+    </select>
+</mapper>
