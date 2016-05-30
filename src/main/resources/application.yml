@@ -9,7 +9,7 @@ spring:
         driver-class-name: oracle.jdbc.driver.OracleDriver
         filters: stat
         maxActive: 1
-        initialSize: 1
+        initialSize: 0
         maxWait: 60000
         minIdle: 0
         timeBetweenEvictionRunsMillis: 60000

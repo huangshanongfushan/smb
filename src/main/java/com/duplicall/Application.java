@@ -14,7 +14,6 @@ import javax.annotation.Resource;
  */
 
 @EnableAutoConfiguration
-@ComponentScan
 public class Application implements CommandLineRunner {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
